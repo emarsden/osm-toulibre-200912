@@ -1,0 +1,155 @@
+% OpenStreetMap pour Toulibre
+%
+% Author: Eric Marsden <eric.marsden@free.fr>
+% Time-stamp: <2009-11-08 emarsden>
+
+
+
+\documentclass[slidestop,serif,10pt]{beamer}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{lmodern}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{yfonts}
+\usepackage{euscript}
+\usepackage{eufrak}
+\usepackage{marvosym}
+\usepackage{mdwlist}
+\usepackage{sverb}
+\usepackage{fancybox}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{movie15}
+\usepackage{lettrine}
+\usepackage{verbatim}
+\usepackage{microtype}
+
+
+%% palatino default:
+% \renewcommand{\rmdefault}{ppl}
+% \renewcommand{\sfdefault}{phv}
+
+%% Charter default:
+\renewcommand{\rmdefault}{bch}
+\renewcommand{\bfdefault}{b}
+
+
+%% misc symbols
+%% \Pointinghand
+%% \checked
+%% \lightning
+%% \frownie, \smilie
+%% `` = \ding{125}
+%% '' = \ding{126}
+
+
+\usepackage{beamerthemeemarsden}
+
+
+\beamerboxesdeclarecolorscheme{alert}{red}{red!15!bg}
+
+% beamer versions
+% \makeatletter
+% \newenvironment{ecmslide}{}{}
+% \def\beginecmslide\frame
+% \def\endecmslide{}
+% \makeatother
+\newcommand{\heading}[1]{\frametitle{\fontfamily{ppl}\selectfont #1}}
+\newcommand{\ecmfrownie}{\raisebox{-0.5ex}{\color{orange}\Huge \frownie}}
+\newcommand{\ecmsmiley}{\raisebox{-0.5ex}{\color{orange}\Huge \smiley}}
+
+
+\newcommand{\ecmfontcharter}{\fontfamily{ppl}\selectfont}
+\newcommand{\ecmfontpalatino}{\fontfamily{bch}\selectfont}
+\newcommand{\ecmfontpag}{\fontfamily{pag}\selectfont}
+
+\newcommand{\ecmsetupplan}{
+  \sffamily\ecmfontpag\Large
+  \setlength{\baselineskip}{1.4\baselineskip}
+  \hypersetup{pdfpagetransition=Dissolve}
+  % \hypersetup{pdfpagetransition=Blinds}
+  % \hypersetup{pdfpagetransition=Wipe}
+  \vspace{1cm}
+}
+
+
+\setlength{\parskip}{0.2\baselineskip}
+\setlength{\parindent}{0mm}
+\setlength{\parsep}{0mm}
+\hyphenpenalty 10000
+\raggedright
+
+% \renewcommand{\labelitemi}{\textbullet}
+% \renewcommand{\labelitemii}{\tiny$\diamondsuit$}
+% \newcommand{\whatis}[1]
+%   {\renewcommand{\labelitemi}{$\blacktriangleright$}%
+%    \renewcommand{\labelitemii}{$\blacktriangleright$}%
+%    \begin{itemize} %
+%    \item #1
+%    \end{itemize}
+%    \renewcommand{\labelitemi}{\textbullet}
+%    \renewcommand{\labelitemii}{\tiny $\diamondsuit$}}
+
+\def\labelitemi\textbullet
+
+
+\title{Le projet OpenStreetMap}
+\author{Éric Marsden}
+\date{Juin 2009}
+% \titlegraphic{\includegraphics[width=3cm]{common-figures/LAAS}}
+
+\hypersetup{
+   pdftitle={Le projet OpenStreetMap},
+   pdfauthor={Eric Marsden},
+   pdfkeywords={openstreetmap, mapping, cartographie},
+   pdftoolbar=false,
+   % pdfmenubar=false,
+   pdfpagemode={FullScreen}
+}
+
+
+\definecolor{gray}{rgb}{0.2,0.2,0.2}
+\definecolor{purple}{rgb}{0.6,0.35,0.6}
+\definecolor{orange}{rgb}{1,0.7734375,0.1171875}
+\definecolor{darkyellow}{rgb}{0.8,0.8,0.2}
+\definecolor{darkgreen}{rgb}{0.29296875,0.46484375,0.35546875}
+
+
+
+\def\listingsize{\footnotesize}
+\setlength\listingindent{0cm}
+
+\begin{document}
+
+
+
+%% FIXME don't number this first slide
+\frame[plain]
+{
+  \vspace{1cm}
+  \begin{center}
+
+%     {\color{structure} \fontfamily{ppl}\selectfont \Huge \em
+%       Le projet \\[0.4cm]
+%       OpenStreetMap \\[0.5cm]}
+    \includegraphics[width=0.9\textwidth]{figures/logo-OSM}
+
+    \small 
+    \vspace{1.1cm}
+    Éric Marsden  \texttt{<eric.marsden@free.fr>}
+    \vspace{1.2cm}
+
+    Toulibre, juin 2009
+  \end{center}
+}
+
+\input{osm-intro.tex}
+\input{osm-fonctionnement.tex}
+\input{osm-demo.tex}
+\input{osm-applications.tex}
+\input{osm-conclusions.tex}
+\end{document}
+
+%% EOF
