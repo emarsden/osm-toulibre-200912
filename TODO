@@ -1,0 +1,17 @@
+-*- outline -*-
+
+
+* Structuration technique
+** base de données principale
+** format planet
+** API REST
+** tracks GPX
+** osm2psql
+** Mapnik
+** minutely diffs
+** outils de détection d'anomalies type osmose
+** exemples d'utilisation de relations
+
+* Communauté
+** Local chapters & association OSM-fr
+** qualité des données OSM
