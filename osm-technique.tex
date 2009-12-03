@@ -3,6 +3,7 @@
 
 
 \tikzstyle{data} = [draw,rounded corners,fill=blue!20]
+\tikzstyle{database} = [draw,cylinder,shape border rotate=90,aspect=0.2,fill=purple!20]
 \tikzstyle{tool} = [draw,thin,fill=green!20,text centered,drop shadow]
 \tikzstyle{medium} = [ellipse, draw, thin, fill=green!20, minimum height=2.5em]
 
@@ -27,25 +28,25 @@
     \path[draw,<->] (JOSM) -- (API);
     \path[draw,<->] (potlatch) -- (API);
 
-    \node[tool,below of=API] (PG) {PostgreSQL backend};
+    \node[database,below of=API] (PG) {PostgreSQL backend};
     \path[draw,<->] (API) -- (PG);
 
     \node[tool,right of=PG,node distance=2cm] (osmosis) {osmosis};
     \path[draw,->] (PG) -- (osmosis);
 
-    \node[tool,right of=osmosis,node distance=2cm] (planet) {dumps ``planet''};
+    \node[database,right of=osmosis,node distance=2cm] (planet) {dumps ``planet''};
     \path[draw,->] (osmosis) -- (planet);
 
     \node[tool,above of=planet] (osm2pgsql) {osm2pgsql};
     \path[draw,->] (planet) -- (osm2pgsql);
-    \node[tool,above of=osm2pgsql] (postgis) {PostGIS};
+    \node[database,above of=osm2pgsql] (postgis) {PostGIS};
     \path[draw,->] (osm2pgsql) -- (postgis);
     \node[tool,above of=postgis,text width=1cm,text centered] (mapnik) {mapnik \& mod\_tile};
     \path[draw,->] (postgis) -- (mapnik);
     \node[tool,right of=mapnik,node distance=1.8cm] (style) {feuilles de style};
     \path[draw,->] (style) -- (mapnik);
     
-    \node[tool,above of=mapnik] (tiles) {tuiles};
+    \node[database,above of=mapnik] (tiles) {tuiles};
     \path[draw,->] (mapnik) -- (tiles);
     \node[tool,above of=tiles] (slippy) {OpenLayers slippymap};
     \path[draw,->] (tiles) -- (slippy);
