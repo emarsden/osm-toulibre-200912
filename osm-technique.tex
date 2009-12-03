@@ -1,0 +1,60 @@
+%% osm-technique.tex
+
+
+
+\tikzstyle{data} = [draw,rounded corners,fill=blue!20]
+\tikzstyle{tool} = [draw,thin,fill=green!20]
+\tikzstyle{medium} = [ellipse, draw, thin, fill=green!20, minimum height=2.5em]
+
+
+\frame { \heading{Composants logiciels} \vfill
+
+\begin{tikzpicture}[auto,>=latex',font={\sffamily\tiny}]
+    \node[data] (0,0) (GPS) {traces GPS};
+    \node[data,right of=GPS,node distance=1.5cm] (yahoo) {imagerie Yahoo!};
+    \node[data,right of=yahoo,node distance=1.5cm] (cadastre) {cadastre};
+    \node[coordinate,below of=yahoo,node distance=0.5cm] (data) {};
+    \node[tool,below of=data,xshift=-1cm,node distance=0.5cm] (JOSM) {JOSM};
+    \node[tool,below of=data,xshift=1cm,node distance=0.5cm] (potlatch) {Potlatch};
+    %% [bend left]
+    \path[draw] (GPS) -- (data);
+    \path[draw] (yahoo) --  (data);
+    \path[draw] (cadastre) -- (data);  
+    \path[draw,->] (data) -- (JOSM);
+    \path[draw,->] (data) -- (potlatch);
+
+    \node[tool,below of=data,node distance=1.5cm] (API) {API 0.6};
+    \path[draw,<->] (JOSM) -- (API);
+    \path[draw,<->] (potlatch) -- (API);
+
+    \node[tool,below of=API] (PG) {PostgreSQL backend};
+    \path[draw,<->] (API) -- (PG);
+
+    \node[tool,right of=PG,node distance=2cm] (osmosis) {osmosis};
+    \path[draw,->] (PG) -- (osmosis);
+
+    \node[tool,right of=osmosis,node distance=2cm] (planet) {dumps ``planet''};
+    \path[draw,->] (osmosis) -- (planet);
+
+    \node[tool,above of=planet] (osm2pgsql) {osm2pgsql};
+    \path[draw,->] (planet) -- (osm2pgsql);
+    \node[tool,above of=osm2pgsql] (postgis) {PostGIS};
+    \path[draw,->] (osm2pgsql) -- (postgis);
+    \node[tool,above of=postgis,text width=1cm,text centered] (mapnik) {mapnik \& mod\_tile};
+    \path[draw,->] (postgis) -- (mapnik);
+    \node[tool,right of=mapnik,node distance=1.8cm] (style) {feuilles de style};
+    \path[draw,->] (style) -- (mapnik);
+    
+    \node[tool,above of=mapnik] (tiles) {tuiles};
+    \path[draw,->] (mapnik) -- (tiles);
+    \node[tool,above of=tiles] (slippy) {OpenLayers slippymap};
+    \path[draw,->] (tiles) -- (slippy);
+
+    \node[tool,right of=planet,node distance=2cm] (XAPI) {XAPI};
+    \path[draw,->] (planet) -- (XAPI);
+\end{tikzpicture}
+
+}
+
+
+%% EOF
