@@ -10,7 +10,7 @@
   \textbf{cartes libres}
 
   \begin{itemize}
-  \item données et cartes rediffusables sous licence libre (CC-BY-SA)
+  \item données et cartes rediffusables sous licence libre \includegraphics[width=1.2cm]{figures/cc-by-sa}
   \item couvrant toute la planète
   \item modèle de contribution à la wiki: chacun peut ajouter des
     traces GPS, corriger le nom d'une rue
@@ -18,21 +18,46 @@
   \end{itemize}
 
   \vfil
+  
 \begin{beamerboxesrounded}[width=\textwidth,scheme=alert,shadow=true]{} \sffamily\footnotesize
-  <<~OpenStreetMap is a project aimed squarely at creating and
+  «OpenStreetMap is a project aimed squarely at creating and
   providing free geographic data such as street maps to anyone who
   wants them. The project was started because most maps you think of
   as free actually have legal or technical restrictions on their use,
   holding back people from using them in creative, productive or
-  unexpected ways.~>>
+  unexpected ways.»
 \end{beamerboxesrounded}
+
 }
 
 
 % \frame{\includegraphics[width=0.95\textwidth]{figures/toulouse-map}}
 % \frame{\includegraphics[width=0.95\textwidth]{figures/toulouse-zoom}}
 
-\frame{\includegraphics[height=0.95\textheight]{figures/OSM-heatmap}}
+\frame{
+  %% http://www.flickr.com/photos/stevefaeembra/3674760067/sizes/o/in/set-72157620624558941/
+ \hskip-0.5cm\includegraphics[width=0.8\textwidth]{figures/osm-heatmap}
+
+ %% http://www.openstreetmap.org/stats/data_stats.html
+
+\begin{tikzpicture}[remember picture,overlay,font={\footnotesize},text
+    width=2cm,text centered]
+   \node[starburst,fill=yellow,draw=red,line width=2pt,shift={(-2cm,-2cm)}]
+      at (current page.north east) {190\,535 utilisateurs};
+   \node[starburst,fill=yellow,draw=red,line width=2pt,shift={(-3cm,-7.1cm)}]
+      at (current page.north east) {1\,300\,501\,165 points GPS};
+\end{tikzpicture}
+}
+
+
+%% http://wiki.openstreetmap.org/wiki/Stats
+\frame{ \heading{Croissance?} \vfill
+  \includegraphics[width=0.95\textwidth]{figures/Osmdbstats1_log}
+}
+
+\frame{ \heading{Croissance?} \vfill
+  \includegraphics[width=0.95\textwidth]{figures/Osmdbstats7A}
+}
 
 
 

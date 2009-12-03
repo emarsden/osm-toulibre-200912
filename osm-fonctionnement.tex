@@ -25,12 +25,15 @@
   \item Transférer les données GPS
   \item Générer et éditer les données OSM
   \item Ajouter des labels et des méta-data
-  \item Rendu
+  \item Exploiter les données (générer un rendu)
   \end{enumerate}
 }
 
 
-\frame { \hfill \includegraphics[width=2cm]{figures/OSM-step1}
+\frame { \heading{Collecte des données}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step1}};
+  \end{tikzpicture}
 
   Sources de données:
   \begin{itemize}
@@ -48,7 +51,10 @@
 }
 
 
-\frame { \hfill \includegraphics[width=2cm]{figures/OSM-step2}
+\frame { \heading{Transfert des données}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step2}};
+  \end{tikzpicture}
 
   \begin{itemize}
   \item Transférer les données vers l'ordinateur
@@ -64,7 +70,11 @@
 }
 
 
-\frame { \hfill \includegraphics[width=2cm]{figures/OSM-step3}
+\frame { \heading{Édition de la carte}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step3}};
+  \end{tikzpicture}
+
 
   \begin{itemize}
   \item Générer et éditer les n\oe{}uds et ways dans OSM
@@ -78,7 +88,10 @@
   \end{itemize}
 }
 
-\frame { \hfill \includegraphics[width=2cm]{figures/OSM-step4}
+\frame { \heading{Édition des données}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step4}};
+  \end{tikzpicture}
 
   \begin{itemize}
   \item Ajouter des étiquettes et méta-données
@@ -86,15 +99,18 @@
   \item Outils d'édition: JOSM, Potlatch
   \item Outils de détection d'incohérences:
     \begin{itemize}
-    \item plugin <<~validator~>> pour JOSM
-    \item couche <<~maplint~>> des cartes
+    \item plugin <<validator>> pour JOSM
+    \item couche <<maplint>> des cartes
     \item outils en ligne comme Keepright!, Osmose
     \end{itemize}
   \end{itemize}
 }
 
 
-\frame { \hfill \includegraphics[width=2cm]{figures/OSM-step5}
+\frame { \heading{Rendu de la carte}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step5}};
+  \end{tikzpicture}
 
   \begin{itemize}
   \item Se fait automatiquement une fois que les données sont transférées
@@ -143,22 +159,27 @@
 
 
 
-\frame{ \heading{Structuration technique} \vfill
+% \frame{ \heading{Structuration technique} \vfill
+% 
+% Structures de données employées:
+% \begin{itemize}
+% \item Un \textit{n\oe{}ud} est un point représentant une position
+% \item Un \textit{way} (ou chemin) est une séquence de n\oe{}uds,
+%   représentant une polyligne ou un polygône
+% \item Une \textit{relation} est un ensemble de n\oe{}uds et de ways
+%   auxquels on donne des propriétés 
+% \item Une \textit{étiquette} ou tag peut être appliquée à un n\oe{}ud, un
+%   way ou une relation, et consiste de paires \texttt{nom=valeur}
+% \end{itemize}
+% 
+% \bigskip
+% La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php/Map_Features}
+% {décrite sur un wiki}. 
+% }
 
-Structures de données employées:
-\begin{itemize}
-\item Un \textit{n\oe{}ud} est un point représentant une position
-\item Un \textit{way} (ou chemin) est une séquence de n\oe{}uds,
-  représentant une polyligne ou un polygône
-\item Une \textit{relation} est un ensemble de n\oe{}uds et de ways
-  auxquels on donne des propriétés 
-\item Une \textit{étiquette} ou tag peut être appliquée à un n\oe{}ud, un
-  way ou une relation, et consiste de paires \texttt{nom=valeur}
-\end{itemize}
+\frame { \heading{Modèle de données} \vfill
 
-\bigskip
-La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php/Map_Features}
-{décrite sur un wiki}. 
+  \includegraphics[width=0.95\textwidth]{figures/datamodel}
 }
 
 
@@ -167,6 +188,9 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
 
   %% FIXME extract map in PDF format for better legibility
   \includegraphics[width=0.99\textwidth]{figures/osm-tagging}
+
+   {\footnotesize\textit{c.f.} \url{http://wiki.openstreetmap.org/index.php/Map\_Features}}
+}
   
 %   Exemples:
 %   \begin{itemize}
@@ -183,7 +207,6 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
 %   \item tourism = zoo
 %   \end{itemize}
 
-}
 
 
 %% EOF
