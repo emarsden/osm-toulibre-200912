@@ -1,7 +1,6 @@
 % OpenStreetMap pour Toulibre
 %
 % Author: Eric Marsden <eric.marsden@free.fr>
-% Time-stamp: <2009-11-08 emarsden>
 
 
 
@@ -12,7 +11,6 @@
 \usepackage{lmodern}
 \usepackage{pifont}
 \usepackage{wasysym}
-\usepackage{yfonts}
 \usepackage{euscript}
 \usepackage{eufrak}
 \usepackage{marvosym}
@@ -25,6 +23,9 @@
 \usepackage{lettrine}
 \usepackage{verbatim}
 \usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,shadows}
+\usetikzlibrary{matrix,chains,scopes,positioning,fit}
 
 
 %% palatino default:
@@ -97,8 +98,7 @@
 
 \title{Le projet OpenStreetMap}
 \author{Éric Marsden}
-\date{Juin 2009}
-% \titlegraphic{\includegraphics[width=3cm]{common-figures/LAAS}}
+\date{Décembre 2009}
 
 \hypersetup{
    pdftitle={Le projet OpenStreetMap},
@@ -106,7 +106,7 @@
    pdfkeywords={openstreetmap, mapping, cartographie},
    pdftoolbar=false,
    % pdfmenubar=false,
-   pdfpagemode={FullScreen}
+   % pdfpagemode={FullScreen}
 }
 
 
@@ -143,7 +143,8 @@
 
 \input{osm-intro}
 \input{osm-fonctionnement}
-\input{osm-demo}
+\input{osm-technique}
+% \input{osm-demo}
 \input{osm-applications}
 \input{osm-conclusions}
 \end{document}

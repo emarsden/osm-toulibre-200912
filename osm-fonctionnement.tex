@@ -1,6 +1,5 @@
 %% osm-fonctionnement.tex
 %%
-%% Time-stamp: <2009-06-15 emarsden>
 
 
 \section{Fonctionnement}
@@ -35,8 +34,7 @@
 
   Sources de données:
   \begin{itemize}
-  \item logs GPS crées par des personnes à pied, à vélo,
-      en voiture ou train, qui prennent des notes et photos du trajet
+  \item logs GPS crées à pied, à vélo, en voiture, en train, avec notes et photos du trajet
   \item Cadastre numérique (en France)
   \item photos satellite Yahoo! (dans les zones couvertes)
   \item CORINE land cover (en Europe)
@@ -46,7 +44,7 @@
   \end{itemize}
 
   \bigskip
-  {\large \color{red}\Stopsign{}} Interdiction d'utiliser les cartes propriétaires!
+  {\Large\color{red}\Stopsign{}} Interdiction d'utiliser les cartes propriétaires!
 }
 
 
@@ -60,7 +58,7 @@
     \end{itemize}
   \item Upload des tracks vers OSM via le site web
     \begin{itemize}
-    \item nécessite un login
+    \item nécessite un compte openstreetmap
     \end{itemize}
   \end{itemize}
 }
@@ -120,27 +118,27 @@
   \end{itemize}
 }
 
-\frame { \hfill \includegraphics[width=2cm]{figures/OSM-step5}
+% \frame { \hfill \includegraphics[width=2cm]{figures/OSM-step5}
+% 
+%   %% http://wiki.openstreetmap.org/wiki/List_of_OSM_based_Services
+%   Plusieurs jeux de tuiles spécialisés existent:
+%   \begin{itemize}
+%   \item \href{http://www.opencyclemap.org/}{OpenCycleMap.org}, pistes cyclables, avec topographie
+%   \item \href{http://www.openpistemap.org/}{OpenPisteMap.org}, carte des pistes
+%   \item \href{http://www.öpnvkarte.de/}{öpnvkarte.de}, transports en commun
+%   \item \href{http://www.openseamap.org/}{OpenSeaMap.org}, navigation en mer
+%   \item \href{http://www.osm-wms.de/}{WMS OSM}, services de mesurage 
+%   \end{itemize}
+% }
 
-  %% http://wiki.openstreetmap.org/wiki/List_of_OSM_based_Services
-  Plusieurs jeux de tuiles spécialisés existent:
-  \begin{itemize}
-  \item \href{http://www.opencyclemap.org/}{OpenCycleMap.org}, pistes cyclables, avec topographie
-  \item \href{http://www.openpistemap.org/}{OpenPisteMap.org}, carte des pistes
-  \item \href{http://www.öpnvkarte.de/}{öpnvkarte.de}, transports en commun
-  \item \href{http://www.openseamap.org/}{OpenSeaMap.org}, navigation en mer
-  \item \href{http://www.osm-wms.de/}{WMS OSM}, services de mesurage 
-  \end{itemize}
-}
 
 
-
-\frame{\vfill\includegraphics[width=0.95\textwidth]{figures/open-cycle-map}}
-\frame{\vfill\includegraphics[height=0.94\textheight]{figures/open-piste-map}}
-\frame{\vfill\includegraphics[width=0.95\textwidth]{figures/opnvkarte}}
-\frame{\vfill\includegraphics[width=0.95\textwidth]{figures/open-sea-map}}
-\frame{\vfill\includegraphics[width=0.95\textwidth]{figures/OSM-WMS}}
-\frame{\vfill\includegraphics[width=0.95\textwidth]{figures/toposm}}
+\frame{\centering OpenCycleMap.org\newline\includegraphics[width=0.95\textwidth]{figures/open-cycle-map}}
+\frame{\centering OpenPisteMap.org\newline\includegraphics[height=0.94\textheight]{figures/open-piste-map}}
+\frame{\centering öpenvkarte.de\newline\includegraphics[width=0.98\textwidth]{figures/opnvkarte}}
+\frame{\centering OpenSeaMap.org\newline\includegraphics[width=0.98\textwidth]{figures/open-sea-map}}
+\frame{\centering osm-wms.de\newline\includegraphics[width=0.98\textwidth]{figures/OSM-WMS}}
+\frame{\centering TopOSM.com\newline\includegraphics[width=0.99\textwidth]{figures/toposm}}
 
 
 
@@ -167,20 +165,23 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
 % http://wiki.openstreetmap.org/index.php/Map_Features
 \frame{ \heading{Étiquettage} \vfill
 
-  Exemples:
-  \begin{itemize}
-  \item highway = motorway
-  \item junction = roundabout
-  \item oneway = yes
-  \item cycleway = lane
-  \item waterway = canal
-  \item railway = station
-  \item railway = subway
-  \item leisure = park
-  \item amenity = pub
-  \item shop = supermarket
-  \item tourism = zoo
-  \end{itemize}
+  %% FIXME extract map in PDF format for better legibility
+  \includegraphics[width=0.99\textwidth]{figures/osm-tagging}
+  
+%   Exemples:
+%   \begin{itemize}
+%   \item highway = motorway
+%   \item junction = roundabout
+%   \item oneway = yes
+%   \item cycleway = lane
+%   \item waterway = canal
+%   \item railway = station
+%   \item railway = subway
+%   \item leisure = park
+%   \item amenity = pub
+%   \item shop = supermarket
+%   \item tourism = zoo
+%   \end{itemize}
 
 }
 
