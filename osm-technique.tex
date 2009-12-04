@@ -25,10 +25,10 @@
     \path[draw,->] (data) -- (potlatch);
 
     \node[tool,below of=data,node distance=1.5cm] (API) {API 0.6};
-    \path[draw,<->] (JOSM) -- (API);
+    \path[draw,<->] (JOSM) -- node {REST} (API);
     \path[draw,<->] (potlatch) -- (API);
 
-    \node[database,below of=API] (PG) {PostgreSQL backend};
+    \node[database,below of=API] (PG) {backend PostgreSQL};
     \path[draw,<->] (API) -- (PG);
 
     \node[tool,right of=PG,node distance=2cm] (osmosis) {osmosis};
@@ -53,9 +53,85 @@
 
     \node[tool,right of=planet,node distance=2cm] (XAPI) {XAPI};
     \path[draw,->] (planet) -- (XAPI);
+
+    \node[tool,right of=planet,node distance=2cm,yshift=2cm] (namefinder) {namefinder};
+    \path[draw,->] (planet) -- (namefinder);
+
 \end{tikzpicture}
+}
+
+
+\frame { \heading{Backend PostgreSQL} \vfill
 
 }
+
+
+\frame { \heading{Fonctionnement API} \vfill
+
+Exemples de requêtes:
+
+\begin{itemize}
+\item \url{http://api.openstreetmap.org/api/0.6/map?bbox=left,bottom,right,top}
+\end{itemize}
+}
+
+
+\frame { \heading{osm2pgsql} \vfill
+
+   \texttt{osm2pgsql -E 900913 -d myDataBase france.osm}
+
+This will process the XML information and load the data into a PostGIS database called
+myDataBase. The -E defines the projection of the source data, which in this case is 900913,
+the projection used in Google Maps, and the default for OpenStreetMap.
+
+If successful, the database will contain the following tables:
+
+planet\_osm\_line
+planet\_osm\_point
+planet\_osm\_polygon
+planet\_osm\_roads
+
+There are two different tables that contain line data, planet\_osm\_line and planet\_osm\_roads. The
+former includes railroads, subways, and other linear information. The latter is made up exclusively
+of roads. The planet\_osm\_point table has a range of data: subway stations, shopping centers,
+universities, and even brothels. Lastly the planet\_osm\_polygon table has, but is not limited to,
+parks, bodies of water, and even buildings in certain urban areas.
+
+}
+
+
+
+\begin{frame}[fragile]{Format XML planet}
+
+\footnotesize
+\begin{verbatim}
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version="0.5" generator="Osmosis 0.26">
+  <bound box="41.33878,-5.14222,51.09280,9.56156" origin="http://www.openstreetmap.org/api/0.5"/>
+ <node id="475037" timestamp="2008-09-18T07:33:10Z" user="HeikoE" lat="48.4949265" lon="7.7839893"/>
+  <node id="475038" timestamp="2008-09-18T07:33:10Z" user="HeikoE" lat="48.4946876" lon="7.7814487"/>
+  <node id="477010" timestamp="2008-09-18T07:33:10Z" user="Pieren" lat="48.4607686" lon="7.5112136"/>
+  <node id="477015" timestamp="2008-09-18T07:33:10Z" user="Pieren" lat="48.4671357" lon="7.5124533"/>
+  ...
+ <way id="2788576" timestamp="2008-09-18T07:33:10Z" user="Alban">
+    <nd ref="12606591"/>
+    <nd ref="14471355"/>
+    <nd ref="12606592"/>
+    <tag k="name" v="Rue Antoine de Saint Exupery"/>
+    <tag k="created_by" v="Editop"/>
+    <tag k="highway" v="residential"/>
+  </way>
+  ...
+   <relation id="960" timestamp="2008-09-18T07:33:10Z" user="Drexl">
+    <member type="way" ref="8157759" role=""/>
+    <member type="way" ref="8157772" role=""/>
+    <tag k="type" v="multipolygon"/>
+    <tag k="created_by" v="Potlatch 0.9c"/>
+  </relation>
+\end{verbatim}
+
+\end{frame}
+
 
 
 %% EOF
