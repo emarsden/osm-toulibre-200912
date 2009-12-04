@@ -5,7 +5,6 @@
 \tikzstyle{data} = [draw,rounded corners,fill=blue!20]
 \tikzstyle{database} = [draw,cylinder,shape border rotate=90,aspect=0.07,fill=purple!40]
 \tikzstyle{tool} = [draw,thin,fill=green!30,text centered,drop shadow]
-\tikzstyle{medium} = [ellipse, draw, thin, fill=green!20, minimum height=2.5em]
 
 
 \frame { \heading{Composants logiciels} \vfill
@@ -17,26 +16,31 @@
     \node[coordinate,below of=yahoo,node distance=0.5cm] (data) {};
     \node[tool,below of=data,xshift=-0.6cm,node distance=0.5cm] (JOSM) {JOSM};
     \node[tool,below of=data,xshift=0.6cm,node distance=0.5cm] (potlatch) {Potlatch};
-    %% [bend left]
-    \path[draw]<2-> (GPS) -- (data);
-    \path[draw]<2-> (yahoo) --  (data);
+    \path[draw] (GPS) -- (data);
+    \path[draw] (yahoo) --  (data);
     \path[draw] (cadastre) -- (data);  
     \path[draw,->] (data) -- (JOSM);
     \path[draw,->] (data) -- (potlatch);
-
+    \pause
+    
     \node[tool,below of=data,node distance=1.5cm] (API) {API 0.6};
-    \path[draw,<->] (JOSM) -- node {REST} (API);
+    \path[draw,<->] (JOSM) -- node[yshift=-0.2cm] {REST} (API);
     \path[draw,<->] (potlatch) -- (API);
 
     \node[database,below of=API] (PG) {backend PostgreSQL};
     \path[draw,<->] (API) -- (PG);
+    \pause
 
+    \node[data,left of=API,node distance=1.5cm] (geodata) {données GIS};
+    \path[draw,->] (geodata) -- (API);
+    \pause
+    
     \node[tool,right of=PG,node distance=2cm] (osmosis) {osmosis};
     \path[draw,->] (PG) -- (osmosis);
-
     \node[database,right of=osmosis,node distance=2cm] (planet) {dumps ``planet''};
     \path[draw,->] (osmosis) -- (planet);
-
+    \pause
+    
     \node[tool,above of=planet] (osm2pgsql) {osm2pgsql};
     \path[draw,->] (planet) -- (osm2pgsql);
     \node[database,above of=osm2pgsql] (postgis) {PostGIS};
@@ -45,24 +49,41 @@
     \path[draw,->] (postgis) -- (mapnik);
     \node[tool,right of=mapnik,node distance=1.8cm] (style) {feuilles de style};
     \path[draw,->] (style) -- (mapnik);
-    
-    \node[database,above of=mapnik] (tiles) {tuiles};
+    \node[database,above of=mapnik,node distance=0.8cm] (tiles) {tuiles};
     \path[draw,->] (mapnik) -- (tiles);
-    \node[tool,above of=tiles] (slippy) {OpenLayers slippymap};
+    \node[above of=tiles,node distance=1.1cm] (slippy)
+    {\includegraphics[width=0.7cm]{figures/OpenLayers-logo}\hskip-0.8cm\raisebox{17pt}{OpenLayers}};
     \path[draw,->] (tiles) -- (slippy);
-
+    \node[right of=slippy,node distance=2cm] (browser){\includegraphics[width=0.7cm]{figures/firefox-logo}};
+    \path[draw,<-] (slippy) -- (browser);
+    \pause
+    
     \node[tool,right of=planet,node distance=2cm] (XAPI) {XAPI};
     \path[draw,->] (planet) -- (XAPI);
-
-    \node[tool,right of=planet,node distance=2cm,yshift=2cm] (namefinder) {namefinder};
+    \node[tool,right of=planet,node distance=2cm,yshift=1cm] (namefinder) {namefinder};
     \path[draw,->] (planet) -- (namefinder);
+    \node[database,below of=planet,node distance=0.7cm] (mirror) {planet mirrors};
+    \path[draw,->] (planet) -- (mirror);
 
 \end{tikzpicture}
 }
 
 
+%% http://svn.openstreetmap.org/applications/utils/osmosis/trunk/script/contrib/apidb_0.6.sql
+%% http://wiki.openstreetmap.org/wiki/Database_schema
+%% http://en.wikipedia.org/wiki/Morton_number_(number_theory)
 \frame { \heading{Backend PostgreSQL} \vfill
 
+  \begin{itemize}
+  \item 1.23 To sur disque (dont 690 Go pour l'historique, 100 Go pour les
+  points GPS)
+  
+  \item Moyenne de 3 millions de tuples lus par seconde
+
+  \item Moyenne de 500 ajouts/modifs/suppressions par seconde
+
+  \item Utilisation de quadtiles  % FIXME expand
+  \end{itemize}
 }
 
 
@@ -103,7 +124,7 @@ parks, bodies of water, and even buildings in certain urban areas.
 
 \begin{frame}[fragile]{Format XML planet}
 
-\footnotesize
+\tiny
 \begin{verbatim}
 <?xml version='1.0' encoding='UTF-8'?>
 <osm version="0.5" generator="Osmosis 0.26">
@@ -133,5 +154,28 @@ parks, bodies of water, and even buildings in certain urban areas.
 \end{frame}
 
 
+
+\begin{frame}[fragile]{Requêtes GIS avec PostGIS}
+
+\begin{verbatim}
+SELECT
+  p.name,
+  ST_Distance(ST_Transform(p.way,3348),
+  ST_Transform(u.way,3348) )
+  FROM planet_osm_point p, planet_osm_point u
+  where p.amenity='pub'
+  AND u.name='University of Ottawa' AND
+  ST_Distance(p.way,u.way)<1;
+\end{verbatim}
+
+\end{frame}
+
+
+
+\frame{ \heading{Osmose}
+
+
+
+}
 
 %% EOF
