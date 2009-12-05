@@ -60,11 +60,13 @@
     \path[draw,->] (planet) -- (osm2pgsql);
     \node[database,above of=osm2pgsql] (postgis) {PostGIS};
     \path[draw,->] (osm2pgsql) -- (postgis);
-    \node[tool,above of=postgis,text width=1cm,text centered] (mapnik) {mapnik \& mod\_tile};
+    \node[above of=postgis] (mapnik)
+    {\includegraphics[width=1.4cm]{figures/mapnik-logo}};
     \path[draw,->] (postgis) -- (mapnik);
     \node[tool,right of=mapnik,node distance=1.8cm] (style) {feuilles de style};
     \path[draw,->] (style) -- (mapnik);
-    \node[database,above of=mapnik,node distance=0.8cm] (tiles) {tuiles};
+    \node[database,above of=mapnik,node distance=1cm,text width=1.1cm,text centered]
+      (tiles) {tuiles (mod\_tile)};
     \path[draw,->] (mapnik) -- (tiles);
     \node[above of=tiles,node distance=1.1cm] (slippy)
     {\includegraphics[width=0.7cm]{figures/OpenLayers-logo}\hskip-0.8cm\raisebox{17pt}{OpenLayers}};
@@ -106,44 +108,7 @@
   \end{itemize}
 }
 
-
-\frame { \heading{Fonctionnement API} \vfill
-
-Exemples de requêtes:
-
-\begin{itemize}
-\item \url{http://api.openstreetmap.org/api/0.6/map?bbox=left,bottom,right,top}
-\end{itemize}
-}
-
-
-\frame { \heading{osm2pgsql} \vfill
-
-   \texttt{osm2pgsql -E 900913 -d myDataBase france.osm}
-
-This will process the XML information and load the data into a PostGIS database called
-myDataBase. The -E defines the projection of the source data, which in this case is 900913,
-the projection used in Google Maps, and the default for OpenStreetMap.
-
-If successful, the database will contain the following tables:
-
-planet\_osm\_line
-planet\_osm\_point
-planet\_osm\_polygon
-planet\_osm\_roads
-
-There are two different tables that contain line data, planet\_osm\_line and planet\_osm\_roads. The
-former includes railroads, subways, and other linear information. The latter is made up exclusively
-of roads. The planet\_osm\_point table has a range of data: subway stations, shopping centers,
-universities, and even brothels. Lastly the planet\_osm\_polygon table has, but is not limited to,
-parks, bodies of water, and even buildings in certain urban areas.
-
-}
-
-
-
 \begin{frame}[fragile]{Format XML planet}
-
 \tiny
 \begin{verbatim}
 <?xml version='1.0' encoding='UTF-8'?>
@@ -170,13 +135,109 @@ parks, bodies of water, and even buildings in certain urban areas.
     <tag k="created_by" v="Potlatch 0.9c"/>
   </relation>
 \end{verbatim}
-
 \end{frame}
 
 
 
+\begin{frame}[fragile]{Fonctionnement API} \vfill
+
+Racine des requêtes: \url{http://api.openstreetmap.org/} \bigskip
+
+\texttt{GET /api/0.6/map?bbox={\color{purple}left},{\color{purple}bottom},{\color{purple}right},{\color{purple}top}}
+
+{\tiny
+\begin{verbatim}
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version="0.6">
+  <bound box="41.33878,-5.14222,51.09280,9.56156" origin="http://www.openstreetmap.org/api/0.5"/>
+ <node id="475037" timestamp="2008-09-18T07:33:10Z" user="HeikoE" lat="48.4949265" lon="7.7839893"/>
+  <node id="475038" timestamp="2008-09-18T07:33:10Z" user="HeikoE" lat="48.4946876" lon="7.7814487"/>
+  <node id="477010" timestamp="2008-09-18T07:33:10Z" user="Pieren" lat="48.4607686" lon="7.5112136"/>
+</osm>
+\end{verbatim}
+}
+\bigskip
+
+\texttt{GET /api/0.6/[{\color{purple}node|way|relation}]/\#id}
+
+{\tiny
+\begin{verbatim}
+<node id="123" lat="..." lon="..." version="142" changeset="12" user="fred" uid="123" timestamp="...">
+  <tag k="note" v="Just a node"/>
+  ...
+</node>
+\end{verbatim}
+}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Fonctionnement API} \vfill
+
+\texttt{PUT /api/0.6/changeset/create}
+{\small
+\begin{verbatim}
+<osm>
+  <changeset>
+    <tag k="created_by" v="JOSM 1.61"/>
+    <tag k="comment" v="Just adding some streetnames"/>
+    ...
+  </changeset>
+  ...
+</osm>
+\end{verbatim}
+}
+
+\bigskip
+
+\texttt{PUT /api/0.6/[{\color{purple}node|way|relation}]/create}
+{\small
+\begin{verbatim}
+<node changeset="12" lat="..." lon="...">
+  <tag k="note" v="Just a node"/>
+  ...
+</node>
+\end{verbatim}
+}
+\end{frame}
+
+
+\tikzstyle{what}    = [baseline,rounded corners,outer sep=3pt,inner sep=2pt,fill=blue!20]
+\tikzstyle{explain} = [text width=3cm,anchor=base,fill=red!20,text centered,font={\sffamily\tiny}]
+\tikzstyle{epath}   = [->,thin,dotted]
+
+
+\frame{\heading{osm2pgsql} \vfill
+
+Prend un dump planet (ou extrait) et le charge dans une base PostGIS,
+selon critères de filtrage
+\begin{itemize}
+\item processus très gourmand en RAM!
+\end{itemize}
+
+Au final, la base contient des tables:
+
+\begin{itemize}
+\item \texttt{planet\_osm\_line}: chemins de fer, métro, ...
+\item \texttt{planet\_osm\_point}: stations de métro, magasins, banques, ...
+\item \texttt{planet\_osm\_polygon}: parks, lacs, bâtiments, ...
+\item \texttt{planet\_osm\_roads}: uniquement les routes
+\end{itemize}
+
+Mapnik intérroge la base PostGIS pour générer les cartes
+\begin{itemize}
+\item à la volée avec \texttt{mod\_tile} 
+\item en pré-rendu
+\end{itemize}
+
+Feuilles de style mapnik permettent de personnaliser le rendu (si
+compatible avec filtrage osm2pgsql
+}
+
+
 \begin{frame}[fragile]{Requêtes GIS avec PostGIS}
 
+Où aller se rafraîchir après 
 \begin{verbatim}
 SELECT
   p.name,
@@ -184,18 +245,12 @@ SELECT
   ST_Transform(u.way,3348) )
   FROM planet_osm_point p, planet_osm_point u
   where p.amenity='pub'
-  AND u.name='University of Ottawa' AND
-  ST_Distance(p.way,u.way)<1;
+  AND u.name='ENSEEIHT' AND
+  ST_Distance(p.way,u.way) < 1;
 \end{verbatim}
 
 \end{frame}
 
 
-
-\frame{ \heading{Osmose}
-
-
-
-}
 
 %% EOF
