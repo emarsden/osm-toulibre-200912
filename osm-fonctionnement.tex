@@ -55,7 +55,8 @@
   \begin{tikzpicture}[remember picture,overlay]
    \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step2}};
   \end{tikzpicture}
-
+  \vfil
+  
   \begin{itemize}
   \item Transférer les données vers l'ordinateur
   \item Conversion au format GPX et suppression points redondants
@@ -70,51 +71,35 @@
 }
 
 
-\frame { \heading{Édition de la carte}
+\frame { \heading{Générer des données OSM}
   \begin{tikzpicture}[remember picture,overlay]
    \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step3}};
   \end{tikzpicture}
 
-  Édition de la carte pour adapter les données brutes aux besoins de la carte
-  (simplification du tracé, correction des erreurs, \dots{})
+  \begin{minipage}{0.8\textwidth}
+  Adapter les données brutes aux besoins de la carte (simplification
+  du tracé, correction des erreurs, \dots{})
+  \end{minipage}
  
   \begin{itemize}
   \item Un \textit{n\oe{}ud} est un point représentant une position
   \item Un \textit{way} (ou chemin) est une séquence de n\oe{}uds
   \item Si elle est fermée, la séquence représente une zone
-  \end{itemize}  
-}
-
-
-\frame { \heading{Modèle de données} \vfill
-  \includegraphics[width=0.95\textwidth]{figures/datamodel}
-}
-
-
-
-\frame { \heading{Traitement}
-  \begin{tikzpicture}[remember picture,overlay]
-   \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step3}};
-  \end{tikzpicture}
- 
-  \begin{itemize}
-  \item Générer et éditer les n\oe{}uds et ways dans OSM
-  \item Édition en ligne avec Potlatch (application Flash)
-  \item Édition hors-ligne avec JOSM (application Java)
-  \item Édition depuis téléphone portable
-  \item API REST permettant de développer d'autres applications
-    \begin{itemize}
-      \item import massif de données géoréférencées (Corine, \textit{etc.})
-    \end{itemize}
   \end{itemize}
+
+  \vfil
+  \begin{center}\includegraphics[width=0.5\textwidth]{figures/datamodel}\end{center}
 }
+
 
 
 \frame { \heading{Édition des données}
   \begin{tikzpicture}[remember picture,overlay]
    \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step4}};
   \end{tikzpicture}
-  Il faut maintenant donner un sens à tous ces points et toutes ces lignes
+  \vfill
+  
+  Il faut maintenant \textbf{donner un sens} à tous ces points et toutes ces lignes
   (routes, ponts, bâtiments, ligne de bus, \dots{})
   
   \begin{itemize}
@@ -130,26 +115,11 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
 }
 
 
-
-\frame { \heading{Édition des données}
+\frame{ \heading{Étiquettage}
   \begin{tikzpicture}[remember picture,overlay]
    \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step4}};
   \end{tikzpicture}
- 
-  \begin{itemize}
-  \item Ajouter des étiquettes et méta-données
-  \item Ajouter des informations aux n\oe{}uds et ways pour permettre leur rendu
-  \item Outils d'édition: JOSM, Potlatch
-  \item Outils de détection d'incohérences:
-    \begin{itemize}
-    \item plugin <<validator>> pour JOSM
-    \item couche <<maplint>> des cartes
-    \item outils en ligne comme Keepright!, Osmose
-    \end{itemize}
-  \end{itemize}
-}
 
-\frame{ \heading{Étiquettage} \vfill
   \includegraphics[width=0.99\textwidth]{figures/osm-tagging-toulouse}
 
   \vfill{\tiny\textit{c.f.} \url{http://wiki.openstreetmap.org/index.php/Map\_Features}}
@@ -171,7 +141,12 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
 %   \end{itemize}
 
 
-\frame{\heading{Édition en ligne} \vfill
+\frame{\heading{Édition en ligne}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step4}};
+  \end{tikzpicture}
+  \vfill
+  
   \begin{minipage}{0.45\textwidth}
     Potlatch
     \begin{itemize}
@@ -189,7 +164,12 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
   \end{minipage}
 }
  
-\frame{ \heading{\'Edition hors-ligne} \vfill
+\frame{ \heading{Édition hors-ligne}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step4}};
+  \end{tikzpicture}
+  \vfill
+
   \begin{minipage}{0.45\textwidth}
     JOSM
     \begin{itemize}
@@ -211,16 +191,27 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
 }
  
 \frame{ \heading{Outils de validation} \vfill
- 
+\setbeamercovered{dynamic}
+\hskip-1cm %
+\begin{minipage}{0.32\textwidth}
 \begin{itemize}
-\item plugin validator
-\item Keepright % http://keepright.ipax.at
-\item Osmose % http://osmose.openstreetmap.fr
-\item OpenStreetBugs % http://openstreetbugs.appspot.com/
-\item MapCompare % http://tools.geofabrik.de/mc/
-\item OSM Inspector % http://tools.geofabrik.de/osmi/
-\item moteurs de routage
+\item<1-> plugin validator de JOSM
+\item<2-> Keepright! % http://keepright.ipax.at
+\item<3-> Osmose % http://osmose.openstreetmap.fr
+\item<4-> OpenStreetBugs % http://openstreetbugs.appspot.com/
+\item<5-> OSM Inspector % http://tools.geofabrik.de/osmi/
+\item<6-> MapCompare % http://tools.geofabrik.de/mc/
+\item<7-> moteurs de routage
 \end{itemize}
+\end{minipage} %
+\begin{minipage}{0.72\textwidth}
+\only<2>{\includegraphics[width=\textwidth]{figures/keepright}}
+\only<3>{\includegraphics[width=\textwidth]{figures/osmose}}
+\only<4>{\includegraphics[width=\textwidth]{figures/openstreetbugs}}
+\only<5>{\includegraphics[width=\textwidth]{figures/osminspector}}
+\only<6>{\includegraphics[width=\textwidth]{figures/mapcompare}}
+
+\end{minipage}
 }
 
 
@@ -228,7 +219,8 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
   \begin{tikzpicture}[remember picture,overlay]
    \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step5}};
   \end{tikzpicture}
-
+  \vfil
+  
   \begin{itemize}
   \item Se fait automatiquement une fois que les données sont transférées
     vers le serveur
@@ -243,7 +235,6 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
     \begin{itemize}
     \item possiblité d'utiliser des feuilles de styles XSLT personnalisées pour
       obtenir des cartes spécialisées
-    \item possibilité d'exporter les cartes vers du SVG pour retouche manuelle
     \end{itemize}
 
   \item Visualisation des tuiles depuis une interface web (Slippymap)
@@ -267,34 +258,13 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
 
 
 
-\frame{\centering OpenCycleMap.org\newline\includegraphics[width=0.95\textwidth]{figures/open-cycle-map}}
-\frame{\centering Letuffe.org Hiking\newline\includegraphics[width=0.95\textwidth]{figures/hiking-letuffe}}
-\frame{\centering OpenPisteMap.org\newline\includegraphics[height=0.94\textheight]{figures/open-piste-map}}
-\frame{\centering öpenvkarte.de\newline\includegraphics[width=0.98\textwidth]{figures/opnvkarte}}
-\frame{\centering OpenSeaMap.org\newline\includegraphics[width=0.98\textwidth]{figures/open-sea-map}}
-\frame{\centering osm-wms.de\newline\includegraphics[width=0.98\textwidth]{figures/OSM-WMS}}
-\frame{\centering TopOSM.com\newline\includegraphics[width=0.99\textwidth]{figures/toposm}}
-
-
-
-
-% \frame{ \heading{Structuration technique} \vfill
-% 
-% Structures de données employées:
-% \begin{itemize}
-% \item Un \textit{n\oe{}ud} est un point représentant une position
-% \item Un \textit{way} (ou chemin) est une séquence de n\oe{}uds,
-%   représentant une polyligne ou un polygône
-% \item Une \textit{relation} est un ensemble de n\oe{}uds et de ways
-%   auxquels on donne des propriétés 
-% \item Une \textit{étiquette} ou tag peut être appliquée à un n\oe{}ud, un
-%   way ou une relation, et consiste de paires \texttt{nom=valeur}
-% \end{itemize}
-% 
-% \bigskip
-% La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php/Map_Features}
-% {décrite sur un wiki}. 
-% }
+\frame{\centering OpenCycleMap.org\newline\vfil\includegraphics[width=0.95\textwidth]{figures/open-cycle-map}}
+\frame{\centering Letuffe.org Hiking\newline\vfil\includegraphics[width=0.95\textwidth]{figures/hiking-letuffe}}
+\frame{\centering OpenPisteMap.org\newline\vfil\includegraphics[height=0.94\textheight]{figures/open-piste-map}}
+\frame{\centering öpenvkarte.de\newline\vfil\includegraphics[width=0.98\textwidth]{figures/opnvkarte}}
+\frame{\centering OpenSeaMap.org\newline\vfil\includegraphics[width=0.98\textwidth]{figures/open-sea-map}}
+\frame{\centering osm-wms.de\newline\vfil\includegraphics[width=0.98\textwidth]{figures/OSM-WMS}}
+\frame{\centering TopOSM.com\newline\vfil\includegraphics[width=0.99\textwidth]{figures/toposm}}
 
 
 % http://github.com/guyou/osm-toulibre-200912/tree/7bad3e946b606952b8ecfe1849afcab83bc7e645
