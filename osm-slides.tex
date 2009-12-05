@@ -28,6 +28,20 @@
 \usetikzlibrary{matrix,chains,scopes,positioning,fit}
 
 
+\newenvironment{changemargin}[2]{\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{0pt}%
+\setlength{\rightmargin}{0pt}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\addtolength{\leftmargin}{#1}%
+\addtolength{\rightmargin}{#2}%
+\addtolength{\textwidth}{-#1}%
+\addtolength{\textwidth}{-#2}%
+}\item }{\end{list}}
+
+
+
 %% palatino default:
 % \renewcommand{\rmdefault}{ppl}
 % \renewcommand{\sfdefault}{phv}

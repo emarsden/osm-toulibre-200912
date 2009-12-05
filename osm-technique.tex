@@ -64,7 +64,7 @@
     \node[above of=postgis] (mapnik)
     {\includegraphics[width=1.6cm]{figures/mapnik-logo}};
     \path[draw,->] (postgis) -- (mapnik);
-    \node[tool,right of=mapnik,node distance=1.8cm] (style) {feuilles de style};
+    \node[tool,right of=mapnik,node distance=2cm] (style) {feuilles de style};
     \path[draw,->] (style) -- (mapnik);
     \node[database,above of=mapnik,node distance=1cm,text width=1.1cm,text centered]
       (tiles) {tuiles (mod\_tile)};
@@ -101,7 +101,11 @@
 
   \item Moyenne de 500 ajouts/modifs/suppressions par seconde
 
+  \pause
   \item Utilisation de quadtiles pour accélérer les recherches  % FIXME expand
+   \begin{tikzpicture}[remember picture,overlay]
+   \node[xshift=-2cm,yshift=-2cm] at (current page.north east) {\includegraphics[width=2.3cm]{figures/osm-quadtiles}};
+   \end{tikzpicture}
 
   \item Système de diffs (par minute, heure, jour) pour permettre à
   d'autres de se synchroniser
