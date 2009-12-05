@@ -89,6 +89,8 @@
 %% http://en.wikipedia.org/wiki/Morton_number_(number_theory)
 \frame { \heading{Backend PostgreSQL} \vfill
 
+  Contient les données actuelles et historiques, les fichiers GPX
+  
   \begin{itemize}
   \item 1.23 To sur disque (dont 690 Go pour l'historique, 100 Go pour les
   points GPS)
@@ -97,7 +99,10 @@
 
   \item Moyenne de 500 ajouts/modifs/suppressions par seconde
 
-  \item Utilisation de quadtiles  % FIXME expand
+  \item Utilisation de quadtiles pour accélérer les recherches  % FIXME expand
+
+  \item Système de diffs (par minute, heure, jour) pour permettre à
+  d'autres de se synchroniser
   \end{itemize}
 }
 
