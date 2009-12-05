@@ -75,7 +75,7 @@
    \node[xshift=-1cm,yshift=-1.3cm] at (current page.north east) {\includegraphics[width=2cm]{figures/OSM-step3}};
   \end{tikzpicture}
 
-  Edition de la carte pour adapter les données brutes aux besoins de la carte
+  Édition de la carte pour adapter les données brutes aux besoins de la carte
   (simplification du tracé, correction des erreurs, \dots{})
  
   \begin{itemize}
@@ -83,8 +83,14 @@
   \item Un \textit{way} (ou chemin) est une séquence de n\oe{}uds
   \item Si elle est fermée, la séquence représente une zone
   \end{itemize}  
-
 }
+
+
+\frame { \heading{Modèle de données} \vfill
+  \includegraphics[width=0.95\textwidth]{figures/datamodel}
+}
+
+
 
 \frame { \heading{Traitement}
   \begin{tikzpicture}[remember picture,overlay]
@@ -95,12 +101,11 @@
   \item Générer et éditer les n\oe{}uds et ways dans OSM
   \item Édition en ligne avec Potlatch (application Flash)
   \item Édition hors-ligne avec JOSM (application Java)
-  \item Édition depuis tél. portable
-  \item Autres logiciels et scripts d'édition
-    \begin{itemize}
-    \item import massif de données (ex.: Corine)
-    \end{itemize}
+  \item Édition depuis téléphone portable
   \item API REST permettant de développer d'autres applications
+    \begin{itemize}
+      \item import massif de données géoréférencées (Corine, \textit{etc.})
+    \end{itemize}
   \end{itemize}
 }
 
@@ -124,11 +129,6 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
 {décrite sur un wiki}.
 }
 
-\frame { \heading{Modèle de données} \vfill
-
-  \includegraphics[width=0.95\textwidth]{figures/datamodel}
-}
-
 
 
 \frame { \heading{Édition des données}
@@ -149,13 +149,10 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
   \end{itemize}
 }
 
-% http://wiki.openstreetmap.org/index.php/Map_Features
 \frame{ \heading{Étiquettage} \vfill
+  \includegraphics[width=0.99\textwidth]{figures/osm-tagging-toulouse}
 
-  %% FIXME extract map in PDF format for better legibility
-  \includegraphics[width=0.99\textwidth]{figures/osm-tagging}
-
-   {\footnotesize\textit{c.f.} \url{http://wiki.openstreetmap.org/index.php/Map\_Features}}
+  \vfill{\tiny\textit{c.f.} \url{http://wiki.openstreetmap.org/index.php/Map\_Features}}
 }
   
 %   Exemples:
@@ -174,7 +171,7 @@ La sémantique des étiquettes est \href{http://wiki.openstreetmap.org/index.php
 %   \end{itemize}
 
 
-frame{ \heading{\'Edition en ligne} \vfill
+\frame{\heading{Édition en ligne} \vfill
   \begin{minipage}{0.45\textwidth}
     Potlatch
     \begin{itemize}
